@@ -16,10 +16,17 @@
 //  ほとんどの開発環境で例外処理の機能を使用できるが, 一部の開発環境では利用できない場合がある.
 //  このQueueはそのことを想定して例外処理の機能を使用しない.
 // 
+// 更新履歴:
+//  2017/5/1:
+//   初期版完成
+//
+//  2017/10/30:
+//   Push関数が右辺値参照を引数に取れるようにした.
+//
 */
 
-#ifndef _INCLUDE_QUEUE_H_
-#define _INCLUDE_QUEUE_H_
+#ifndef QUEUE_H
+#define QUEUE_H
 
 
 template <typename TYPE> class Queue
@@ -96,7 +103,7 @@ public:
         return true;
     }
 
-    bool Push(TYPE item) {
+    bool Push(const TYPE &item) {
 
         if (count >= capacity)
         {
@@ -112,6 +119,10 @@ public:
         count++;
 
         return true;
+    }
+
+    bool Push(TYPE &&item) {
+        return Push(item);
     }
 
     bool Peek(TYPE *item) {
