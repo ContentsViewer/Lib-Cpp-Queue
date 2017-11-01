@@ -26,6 +26,7 @@
 //  2017/11/1:
 //   代入演算子部のバグ修正(宣言されていない変数名)
 //   継承されることを考慮してprivate変数をprotectedに変更
+//   最初にPushした際, メモリアクセス違反する問題を修正
 //
 */
 
@@ -40,7 +41,7 @@ protected:
     int capacity = 0;
     TYPE *array = 0x00;
 
-    int startPoint = -1;
+    int startPoint = 0;
 
     void DeleteQueue() {
         if (array != 0x00) {
